@@ -3,30 +3,40 @@ import Movie from '../entities/Movie';
 import IMoviesRepository from '../../../repositories/IMoviesRepository';
 import ICreateMovieDTO from '../../../dtos/ICreateMovieDTO';
 
-class UsersRepository implements IMoviesRepository {
+class MoviesRepository implements IMoviesRepository {
     private ormRepository: Repository<Movie>;
 
     constructor() {
         this.ormRepository = getRepository(Movie);
     }
 
-    public async create(userData: ICreateMovieDTO): Promise<Movie> {
-        const user = this.ormRepository.create(userData);
-        await this.ormRepository.save(user);
-        return user;
+    public async create(movieData: ICreateMovieDTO): Promise<Movie> {
+        const movie = this.ormRepository.create(movieData);
+        await this.ormRepository.save(movie);
+        return movie;
     }
 
-    public async findByName(name: string): Promise<Movie| undefined> {
-        const user = this.ormRepository.findOne({
-            where: { name }
+    public async findByNameAndRented(name: string, rented: number): Promise<Movie| undefined> {
+        const movie = this.ormRepository.findOne({
+            where: { name, rented }
         });
-        return user;
+        return movie;
     }
 
     public async findAll(): Promise<Movie[]> {
-        const user = this.ormRepository.find();
-        return user;
+        const movie = this.ormRepository.find();
+        return movie;
+    }
+
+    public async rent(movie: Movie): Promise<void> {
+        movie.rented = 1;
+        await this.ormRepository.save(movie);
+    }
+
+    public async returnMovie(movie: Movie): Promise<void> {
+        movie.rented = 0;
+        await this.ormRepository.save(movie);
     }
 }
 
-export default UsersRepository;
+export default MoviesRepository;

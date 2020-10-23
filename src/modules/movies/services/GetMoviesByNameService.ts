@@ -11,7 +11,7 @@ class GetMoviesByNameService {
     }
     
     public async execute(name: string): Promise<Movie | undefined> {
-        const user = await this.moviesRepository.findByName(name);
+        const user = await this.moviesRepository.findByNameAndRented(name, 0);
 
         return user;
     }   
