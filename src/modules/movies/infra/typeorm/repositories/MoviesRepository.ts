@@ -28,13 +28,15 @@ class MoviesRepository implements IMoviesRepository {
         return movie;
     }
 
-    public async rent(movie: Movie): Promise<void> {
+    public async rent(movie: Movie, user_id: string): Promise<void> {
         movie.rented = 1;
+        movie.user_id = user_id;
         await this.ormRepository.save(movie);
     }
 
     public async returnMovie(movie: Movie): Promise<void> {
         movie.rented = 0;
+        movie.user_id = "0";
         await this.ormRepository.save(movie);
     }
 }

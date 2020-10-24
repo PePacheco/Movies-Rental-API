@@ -5,6 +5,6 @@ export default interface IMoviesRepository {
     create(data: ICreateMovieDTO): Promise<Movie>;
     findByNameAndRented(name: string, rented: number): Promise<Movie | undefined>;
     findAll(): Promise<Movie[]>;
-    rent(movie: Movie): Promise<void>;
+    rent(movie: Movie, user_id: string): Promise<void>;
     returnMovie(movie: Movie): Promise<void>;
 }

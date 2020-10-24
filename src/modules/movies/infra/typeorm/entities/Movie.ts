@@ -9,7 +9,7 @@ import {
 @Entity('movies')
 class Movie {
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id: string;
 
     @Column()
     name: string;
@@ -19,6 +19,9 @@ class Movie {
 
     @Column()
     rented: number;
+
+    @Column()
+    user_id: string;
 
     @CreateDateColumn()
     created_at: Date;
