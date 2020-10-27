@@ -5,7 +5,7 @@ import RentMovieService from '../../../services/RentMovieService';
 class RentMoviesController {
     public async update(request: Request, response: Response): Promise<Response> {
         const rentMovieService = new RentMovieService();
-        const movie = await rentMovieService.execute(request.params.name, request.user.id);
+        const movie = await rentMovieService.execute(request.body.name, request.user.id);
         return response.json(movie);
     }
 }

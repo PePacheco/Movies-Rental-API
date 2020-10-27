@@ -18,8 +18,8 @@ routes.get('/', moviesController.index);
 
 routes.post('/', moviesController.create);
 
-routes.patch('/:name/rent', rentMoviesController.update);
+routes.patch('/rent', rentMoviesController.update);
 
-routes.patch('/:name/return', returnMoviesController.update);
+routes.patch('/return', returnMoviesController.update);
 
 export default routes;
