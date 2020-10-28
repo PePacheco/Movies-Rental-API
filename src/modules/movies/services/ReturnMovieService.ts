@@ -14,7 +14,7 @@ class RentMovieService {
     public async execute(name: string, user_id: string): Promise<Movie> {
         const movie = await this.moviesRepository.findMovieByUserRented(name, user_id);
         if(!movie) {
-            throw new AppError('Movie not found or not rented for this user', 404);
+            throw new AppError('Movie not found or not rented by this user', 404);
         }
         this.moviesRepository.returnMovie(movie);
         return movie;
