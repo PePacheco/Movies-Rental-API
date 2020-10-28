@@ -23,6 +23,13 @@ class MoviesRepository implements IMoviesRepository {
         return movie;
     }
 
+    public async findUserRented(name: string, user_id: string): Promise<Movie| undefined> {
+        const movie = this.ormRepository.findOne({
+            where: { user_id, name }
+        });
+        return movie;
+    }
+
     public async findAll(): Promise<Movie[]> {
         const movie = this.ormRepository.find();
         return movie;

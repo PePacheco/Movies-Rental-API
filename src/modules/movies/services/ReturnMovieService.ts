@@ -11,10 +11,10 @@ class RentMovieService {
         this.moviesRepository = new MoviesRepository()
     }
     
-    public async execute(name: string): Promise<Movie> {
-        const movie = await this.moviesRepository.findByNameAndRented(name, 1);
+    public async execute(name: string, user_id: string): Promise<Movie> {
+        const movie = await this.moviesRepository.findUserRented(name, user_id);
         if(!movie) {
-            throw new AppError('Movie not found or not rented', 404);
+            throw new AppError('Movie not found or not rented for this user', 404);
         }
         this.moviesRepository.returnMovie(movie);
         return movie;
