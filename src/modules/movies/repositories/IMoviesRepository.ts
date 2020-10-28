@@ -7,5 +7,5 @@ export default interface IMoviesRepository {
     findAll(): Promise<Movie[]>;
     rent(movie: Movie, user_id: string): Promise<void>;
     returnMovie(movie: Movie): Promise<void>;
-    findUserRented(name: string, user_id: string): Promise<Movie | undefined>;
+    findByUserRented(name: string, user_id: string): Promise<Movie | undefined>;
 }
